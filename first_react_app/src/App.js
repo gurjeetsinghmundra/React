@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Student from './components/Student';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <Header/>  
+
+    <h1>First Project</h1>
+
+
+    <Student id={1} name="Gurjeet"/>
+    <Student id={2} name="Gurjeet"/>
+    <Footer/>
+
+
     </div>
   );
 }
 
+
+
+
 export default App;
+
+//export default function_name
+// we need to first export then only we can import
