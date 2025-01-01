@@ -3,6 +3,11 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Student from './components/Student';
+import Demo from './components/Demo';
+import Practice from './components/Practice';
+import ChangeName from './components/ChangeName';
+
+
 
 function App() {
   return (
@@ -17,6 +22,11 @@ function App() {
     <Student id={2} name="Gurjeet"/>
     <Footer/>
 
+    <Demo message="Happy New Year" year="2025"/>
+
+    <Practice/>
+
+    <ChangeName/>
 
     </div>
   );
