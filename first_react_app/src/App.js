@@ -6,8 +6,9 @@ import Student from './components/Student';
 import Demo from './components/Demo';
 import Practice from './components/Practice';
 import ChangeName from './components/ChangeName';
-
-
+import Counter from './components/Counter';
+import EvenOdd from './components/EvenOdd';
+import DisplayName from './components/DisplayName';
 
 function App() {
   return (
@@ -27,6 +28,12 @@ function App() {
     <Practice/>
 
     <ChangeName/>
+
+    <Counter/>
+
+    <EvenOdd/>
+
+    <DisplayName/>
 
     </div>
   );
