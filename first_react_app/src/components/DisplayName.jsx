@@ -11,16 +11,24 @@ function DisplayName()
     let [area,setArea]=useState(length*breadth);
 
     useEffect(()=>{
-        setArea(length*breadth);
+        let value=setTimeout(()=>
+            { setArea(length*breadth)},5000)
+        //cleanup function
+        return()=>{
+            console.log("cleanup function")
+            clearTimeout(value);
+        }
+       
     },[length,breadth])
 
     return(
         <div>
             <hr />
+            <h1>Display Name</h1>
             <input type="text" value={value}
             onChange={(e)=>{
-               setValue(e.target.value);
-               console.log(value);
+             setValue(e.target.value);
+            // console.log(value);
                 }} />
             <h1>{value}</h1>
 

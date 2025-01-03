@@ -9,11 +9,14 @@ import ChangeName from './components/ChangeName';
 import Counter from './components/Counter';
 import EvenOdd from './components/EvenOdd';
 import DisplayName from './components/DisplayName';
+import LoggedIn from './components/LoggedIn';
+
 
 function App() {
   return (
     <div className="App">
     
+    <LoggedIn/>
     <Header/>  
 
     <h1>First Project</h1>
@@ -34,6 +37,8 @@ function App() {
     <EvenOdd/>
 
     <DisplayName/>
+
+    {/* <LoggedIn/> */}
 
     </div>
   );
