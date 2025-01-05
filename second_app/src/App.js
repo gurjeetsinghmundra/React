@@ -1,6 +1,9 @@
 import './App.css';
 import About from './components/About';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+
 
 
 
@@ -14,7 +17,17 @@ const router = createBrowserRouter([
         {
           path:"/about",
           element:<About/>
-        }])
+        },
+        {
+          path:"/contact",
+          element:<Contact/>
+        },
+        {
+          path:"/footer",
+          element:<Footer/>
+        }
+      ]
+      )
 
 function App() {
   return (
@@ -24,9 +37,7 @@ function App() {
       to avoid it we use link in React */}
       {/* <Navbar/> */}
 
-        <RouterProvider router={router}/>
-
-      
+        <RouterProvider router={router}/>        
 
     </div>
   );
