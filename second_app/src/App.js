@@ -8,23 +8,31 @@ import Navbar from './components/Navbar';
 
 
 //we need to write this
-//search in google react routing dom or routing in dom
+//search in google react routing dom or routing in react
 //routing with createBrowserRouter
 import {createBrowserRouter ,RouterProvider} from 'react-router-dom'
+import NotFound from './components/NotFound';
 
 
 const router = createBrowserRouter([
         {
           path:"/about",
-          element:<About/>
+          element:<><Navbar/> <About/> <Footer/></> //will display about betweeen navbar and footer
         },
         {
           path:"/contact",
-          element:<Contact/>
+          element:<><Navbar/> <Contact/> <Footer/></>
         },
         {
-          path:"/footer",
-          element:<Footer/>
+          path:"/",  //this is for home page(which comes in front when we open the web page)
+          element:<>
+              <Navbar/>
+              <Footer/>
+          </>
+        },
+        {
+          path:"*",  //jitne routes banaye hai usko chordke saare
+          element:<NotFound/>
         }
       ]
       )
