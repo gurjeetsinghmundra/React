@@ -3,8 +3,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-
-
+import Product from './components/Product';
 
 
 //we need to write this
@@ -20,7 +19,8 @@ const router = createBrowserRouter([
           element:<><Navbar/> <About/> <Footer/></> //will display about betweeen navbar and footer
         },
         {
-          path:"/contact",
+          // object me key id naam se banegi
+          path:"/contact/:id",
           element:<><Navbar/> <Contact/> <Footer/></>
         },
         {
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
         {
           path:"*",  //jitne routes banaye hai usko chordke saare
           element:<NotFound/>
+        },
+        {
+          path:"/product/:id",
+          element:<><Navbar/><Product/> <Footer/></>
         }
       ]
       )
