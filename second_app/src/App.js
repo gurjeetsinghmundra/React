@@ -4,6 +4,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Product from './components/Product';
+import Courses from './components/Courses';
 
 
 //we need to write this
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         {
           path:"/product/:id",
           element:<><Navbar/><Product/> <Footer/></>
+        },
+        {
+          path:"/courses",
+          element:<><Navbar/><Courses/> <Footer/></>
         }
       ]
       )
