@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Product from './components/Product';
 import Courses from './components/Courses';
+import CourseItem from './components/CourseItem';
 
 
 //we need to write this
@@ -12,6 +13,7 @@ import Courses from './components/Courses';
 //routing with createBrowserRouter
 import {createBrowserRouter ,RouterProvider} from 'react-router-dom'
 import NotFound from './components/NotFound';
+
 
 
 const router = createBrowserRouter([
@@ -41,9 +43,19 @@ const router = createBrowserRouter([
         },
         {
           path:"/courses",
-          element:<><Navbar/><Courses/> <Footer/></>
-        }
-      ]
+          element:<><Navbar/><Courses/> <Footer/></>,
+          children:[{
+            path:"web-designing",
+            element:<CourseItem id={1} name="Web designing" fees={20000}/>
+          },
+         {
+            path:"sql",
+            element:<CourseItem id={2} name="Foundation with Sql" fees={25000}/>
+          },{
+            path:"java",
+            element:<CourseItem id={3} name="Core & Advance Java" fees={60000}/>
+          }]
+        }]
       )
 
 function App() {
