@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* Css */
+
+.github-card
+{
+  width:18rem;
+}
