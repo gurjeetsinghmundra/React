@@ -5,6 +5,12 @@ function GithubCard() {
 
     let [githubData, setGithubData] = useState({}); //useState me object pass kiya hai
     let [repositories, setRepositories] = useState([]); //useState me array pass kiya hai
+    let[searchQuery,setSearchQuery]=useState("");
+
+    const handleChange = (event)=>{
+        setSearchQuery(event.target.value);
+    }    //target is input box
+
 
     //  useEffect ko ek function aur ek array chahiye raheta hai
     useEffect(() => {
@@ -49,24 +55,42 @@ function GithubCard() {
                 </div>
             </div>
 
+            {/* Search */}
+
+
+            <input type="text" onChange={handleChange} />
+
+
+
+
+
             {/* Repositories Start */}
 
            
             <table className="table table-success table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        {/* <th scope="col"></th> */}
                         <th scope="col">Repository Name</th>
                         <th scope="col">Repository Link</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        repositories.map((repoObj)=>{
+                        repositories.filter((repoObj)=>{
+                            return repoObj.name.toLowerCase()
+                            .includes(searchQuery.toLowerCase())
+                        })
+                        .map((repoObj)=>{
                             return( <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
+                                {/* <th>{
+                                    for(let i=0,i>5,i++)
+                                    {
+
+                                    }
+                                    }</th> */}
+                                <th scope="row">{repoObj.name}</th>
+                                <td> <a href={repoObj.html_url}>Visit Repo</a></td>
                             </tr>)
                         })
                     }
