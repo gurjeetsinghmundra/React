@@ -1,13 +1,16 @@
 import React from 'react'
+import { getProductById } from '../../services/ProductService';
 
 // function ProductItem({productName,productDescription,productPrice}) 
 // the above is object destructing , since the function takes 1 object , 
 // by using {} we are destructing it into 3
-function ProductItem({ productName, productDescription, productPrice ,product_link }) {
+function ProductItem({ productName, productDescription, productPrice ,product_link, onSelectProduct }) {
 
-    const onSelectUpdate=(link)=>{
+    const onSelectUpdate= async (link)=>{
 
-        console.log(link);
+        // console.log(link);
+       let product = await getProductById(link);
+       onSelectProduct(product) //passing product as an argument
     }
 
     

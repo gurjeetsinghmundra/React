@@ -9,6 +9,10 @@ function Product() {
 
   //products ke andhar array(empty) ajayega , aur usko aage change karne ke liye setProduct use karenge
   let [products, setProducts] = useState([])
+  let[selectedProduct,setSelectedProduct] = useState(null); //or we can pass {} (object which has nothing)
+  // selectedProduct is a variable with null value
+  // setSelectedProduct is a function that change the value of selectedProduct
+  // kissi ki value baar baar change hoo rhi hai toh useState lena hai
 
 
   useEffect(() => {
@@ -30,7 +34,13 @@ function Product() {
 
   }
 
+// To set selected product
 
+  const handleSelectProduct=(selectedProduct)=>{
+
+    setSelectedProduct(selectedProduct)
+    console.log(selectedProduct)
+  }
 
 
   return (
@@ -42,7 +52,12 @@ function Product() {
         <div class="row">
           <div class="col">
            {/* Product Form:Start */}
-            <ProductForm onAddProduct={refreshProducts} />
+            <ProductForm 
+            onAddProduct={refreshProducts}
+            selectedProduct={selectedProduct}
+            //left side is a property (prop)from productForm.jsx
+            //right side is value w have declared above 
+            />
             {/* Product Form:End */}
           </div>
           <div class="col">
@@ -58,7 +73,8 @@ function Product() {
               productDescription={p.productDescription}
               productPrice={p.productPrice}
               product_link={p._links.self.href}  //to get product link(view in postman)
-
+              onSelectProduct={handleSelectProduct}
+             
             />
           )
         })}

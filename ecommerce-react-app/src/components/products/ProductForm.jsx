@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { addProduct } from '../../services/ProductService'
 
-function ProductForm({onAddProduct}) {
+function ProductForm({onAddProduct,selectedProduct}) {
 
       // Function to be called when form will be submitted
+     let [product,setProduct] = useState({productId:'',productName:'',productDescription:'',productDescription:''})  
 
       const submitHandler = (e)=>
         {
@@ -24,6 +25,25 @@ function ProductForm({onAddProduct}) {
 
         // ====================================================
 
+        useEffect(()=>{
+            if(selectedProduct) //in javascript if is executed when the condition is non-null or when it is true
+        //    agar selectedProduct null rahega toh yeh block nhi chalega
+            setProduct(selectedProduct)
+
+        },[selectedProduct])
+
+
+ // useEffect :length aur breadth ki value change hoyegi toh area of rectangle kaa diagram be change hoyega
+
+
+//  To control change in input box
+
+        const handleChange = (e) =>
+        {
+            console.log(e.target)
+        
+        }
+ 
     return (
 
         // Styling the form
@@ -40,15 +60,18 @@ function ProductForm({onAddProduct}) {
                 <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Product Id</label>
                     <input type="number" className="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" name='productId' />
+                        aria-describedby="emailHelp" name='productId'
+                        value={product.productId} onChange={handleChange} /> 
                     {/*Assigning Name is very imp coz we get data through it  */}
+                    {/* value={product.productId} , value that will be shown on input box  */}
                 </div>
 
                 {/* Product Name */}
                 <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Product Name</label>
                     <input type="text" className="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" name='productName' />
+                        aria-describedby="emailHelp" name='productName'
+                        value={product.productName}  onChange={handleChange} />
 
                 </div>
 
@@ -56,7 +79,8 @@ function ProductForm({onAddProduct}) {
                 <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Product Description</label>
                     <input type="text" className="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" name='productDescription' />
+                        aria-describedby="emailHelp" name='productDescription'
+                        value={product.productDescription}  onChange={handleChange} />
 
                 </div>
 
@@ -64,12 +88,15 @@ function ProductForm({onAddProduct}) {
                 <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Product Price</label>
                     <input type="number" className="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" name='productPrice' />
+                        aria-describedby="emailHelp" name='productPrice' 
+                        value={product.productPrice}  onChange={handleChange}/>
 
                 </div>
 
                 {/* Button to submit form */}
                 <button type="submit" className="btn btn-primary">Submit</button>
+
+                
 
             </form>
         </div>
