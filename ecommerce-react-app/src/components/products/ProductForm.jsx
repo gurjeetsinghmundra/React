@@ -37,10 +37,22 @@ function ProductForm({onAddProduct,selectedProduct}) {
 
 
 //  To control change in input box
+//  Control and uncontrol input
 
         const handleChange = (e) =>
         {
-            console.log(e.target)
+            // console.log(e.target)
+            // target matlab inputbox
+            // target is an object
+            let {name,value}=e.target;
+            // console.log(name+" "+value);
+            setProduct((prevProduct)=>{
+
+                console.log(prevProduct)
+                return {...prevProduct,[name]:value};
+                 // school["city"]="mumbai" (example of above)
+                //  object destructuring
+            })
         
         }
  
@@ -72,6 +84,7 @@ function ProductForm({onAddProduct,selectedProduct}) {
                     <input type="text" className="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" name='productName'
                         value={product.productName}  onChange={handleChange} />
+                        {/* productName input box kaa name hai */}
 
                 </div>
 
