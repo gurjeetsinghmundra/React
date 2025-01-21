@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { addProduct } from '../../services/ProductService'
+import { addProduct, updateProduct } from '../../services/ProductService'
 
-function ProductForm({onAddProduct,selectedProduct}) {
+function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct}) {
 
       // Function to be called when form will be submitted
      let [product,setProduct] = useState({productId:'',productName:'',productDescription:'',productDescription:''})  
@@ -18,6 +18,8 @@ function ProductForm({onAddProduct,selectedProduct}) {
                 productPrice:e.target.productPrice.value,
             }).then(data=>{
                 onAddProduct();
+                setProduct({ productId: '', productName: '', productDescription: '', productPrice: '' });
+
                 return data;
             })
             
@@ -37,7 +39,7 @@ function ProductForm({onAddProduct,selectedProduct}) {
 
 
 //  To control change in input box
-//  Control and uncontrol input
+//  Controlled and uncontrolled input
 
         const handleChange = (e) =>
         {
@@ -55,6 +57,29 @@ function ProductForm({onAddProduct,selectedProduct}) {
             })
         
         }
+
+     // ===========================================================================
+
+    // To Handle Update
+
+    const updateHandler=(e)=>{
+        e.preventDefault();
+        console.log("Update Handler Invoked") //Invoked Means Called
+         // console.log(selectedProduct._links.self.href)
+        updateProduct(selectedProduct["_links"]["self"]["href"],{
+            productName:e.target.productName.value,
+            productDescription:e.target.productDescription.value,
+            productPrice:e.target.productPrice.value
+        }
+    ).then(data=>{
+        onUpdateProduct();
+        setProduct({ productId: '', productName: '', productDescription: '', productPrice: '' });
+
+        return data;
+    })
+       
+
+    }
  
     return (
 
@@ -65,8 +90,9 @@ function ProductForm({onAddProduct,selectedProduct}) {
         
         <div className='container  border border-primary border-2 p-3 my-3'>
 
-
-            <form onSubmit={submitHandler}>
+{/* Ternary operator is used below where if value is null then submitHandler will be invoked(called)  */}
+    {/*or else if value is already present than updateHandler will be invoked  */}
+            <form onSubmit={selectedProduct?updateHandler:submitHandler}>
                 {/* Product Id*/}
                 <h1 className='bg-primary p-3 text-white text-center'>Add Product</h1>
                 <div className="mb-3">
@@ -107,7 +133,9 @@ function ProductForm({onAddProduct,selectedProduct}) {
                 </div>
 
                 {/* Button to submit form */}
-                <button type="submit" className="btn btn-primary">Submit</button>
+                {selectedProduct? <button type="submit" className="btn btn-primary">Update</button>:
+                 <button type="submit" className="btn btn-primary">Submit</button>}
+               
 
                 
 

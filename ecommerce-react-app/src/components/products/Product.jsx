@@ -54,6 +54,7 @@ function Product() {
            {/* Product Form:Start */}
             <ProductForm 
             onAddProduct={refreshProducts}
+            onUpdateProduct={refreshProducts}
             selectedProduct={selectedProduct}
             //left side is a property (prop)from productForm.jsx
             //right side is value w have declared above 
