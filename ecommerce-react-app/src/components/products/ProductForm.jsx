@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { addProduct, updateProduct } from '../../services/ProductService'
 
-function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct}) {
+function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct ,setSelectedProduct}) {
 
       // Function to be called when form will be submitted
      let [product,setProduct] = useState({productId:'',productName:'',productDescription:'',productDescription:''})  
@@ -19,7 +19,7 @@ function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct}) {
             }).then(data=>{
                 onAddProduct();
                 setProduct({ productId: '', productName: '', productDescription: '', productPrice: '' });
-
+                
                 return data;
             })
             
@@ -75,7 +75,8 @@ function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct}) {
         onUpdateProduct();
         setProduct({ productId: '', productName: '', productDescription: '', productPrice: '' });
 
-        return data;
+        setSelectedProduct(null);
+        // return data;
     })
        
 
