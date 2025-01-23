@@ -4,7 +4,9 @@ import ProductItem from './ProductItem'
 import ProductForm from './ProductForm'
 
 
-function Product() {
+
+// if we dont add {} then
+function Product({queryFromNavbar}) {
 
 
   //products ke andhar array(empty) ajayega , aur usko aage change karne ke liye setProduct use karenge
@@ -14,6 +16,7 @@ function Product() {
   // setSelectedProduct is a function that change the value of selectedProduct
   // kissi ki value baar baar change hoo rhi hai toh useState lena hai
 
+  let [searchQuery,setSearchQuery] = useState('')
 
   useEffect(() => {
     getProducts() //return promise
@@ -22,7 +25,12 @@ function Product() {
         // console.log(data);
 
       })
-  }, []) //atleast 1 baar yeh chalega
+
+      if(queryFromNavbar)
+      {
+        setSearchQuery(queryFromNavbar)
+      }
+  }, [queryFromNavbar]) //atleast 1 baar yeh chalega
 
 
   // To refresh all product when you add product
@@ -109,7 +117,7 @@ function Product() {
 
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle ms-auto " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Total Products : <span className="badge bg-secondary">{products.length}</span>
+                Total Products : <span className="badge bg-secondary">{products.length}</span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li onClick={() => { sort(1) }} ><a class="dropdown-item" href="#" >Low To High</a></li>
@@ -118,14 +126,32 @@ function Product() {
                 <li onClick={() => { sort(4) }}><a class="dropdown-item" href="#">Z-A</a></li>
               </ul>
             </div>
-
+              <hr />
             {/* Sort : End */}
+
+            {/*========================== Search ======================================*/}
+            <div class="mb-3 my-2">
+
+              <input type="email" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" 
+                onChange={(e)=>{setSearchQuery(e.target.value)}}/>
+                {/* current input box kaa target value fetch karega */}
+              <div id="emailHelp" class="form-text">Enter search query</div>
+            </div>
+            {/* =====================(search End)====================================== */}
+
 
             {/* Displaying Products : Start */}
             {/* Grid Cards */}
             {/* 2 cards ke beach ka jagah is called gutter(g) */}
             <div className="row row-cols-1 row-cols-md-2 g-4 my-2">  {/*my-2 (margin top and bottom) add by me */}
-              {products.map((p) => {
+             
+             {/* includes check the word/letter is present or not */}
+
+              {products.filter(p=>{
+                return p.productName.toLowerCase()
+                .includes(searchQuery.toLowerCase())
+              }).map((p) => {
                 return (
                   <ProductItem
                     productName={p.productName}
