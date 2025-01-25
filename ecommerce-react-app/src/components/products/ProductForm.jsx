@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { addProduct, updateProduct } from '../../services/ProductService'
+import { addProduct, updateProduct, uploadProductImage } from '../../services/ProductService'
 
 function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct ,setSelectedProduct}) {
 
@@ -17,6 +17,13 @@ function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct ,setSelected
                 productDescription:e.target.productDescription.value,
                 productPrice:e.target.productPrice.value,
             }).then(data=>{
+
+                // 
+                uploadProductImage(data._links.self.href,e.target.productImage.files[0])
+                .then(data=>{
+                    console.log("Image Update")
+                })
+
                 onAddProduct();
                 setProduct({ productId: '', productName: '', productDescription: '', productPrice: '' });
                 
@@ -69,7 +76,7 @@ function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct ,setSelected
         updateProduct(selectedProduct["_links"]["self"]["href"],{
             productName:e.target.productName.value,
             productDescription:e.target.productDescription.value,
-            productPrice:e.target.productPrice.value
+            productPrice:e.target.productPrice.value,
         }
     ).then(data=>{
         onUpdateProduct();
@@ -130,6 +137,16 @@ function ProductForm({onAddProduct,selectedProduct ,onUpdateProduct ,setSelected
                     <input type="number" className="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp" name='productPrice' 
                         value={product.productPrice}  onChange={handleChange}/>
+
+                </div>
+
+                
+                {/* Product Image */}
+                <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Product Image</label>
+                    <input type="file" className="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" name='productImage' 
+                         onChange={handleChange}/>
 
                 </div>
 

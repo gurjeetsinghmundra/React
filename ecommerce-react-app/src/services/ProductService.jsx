@@ -87,3 +87,19 @@ export const getProductsZtoA = ()=>{
     .then(data=>data["_embedded"]["products"])
     
 }
+
+// body post form-data (key value pair)
+
+export const uploadProductImage= (product_link,file)=>{
+
+    let formData = new FormData();
+    formData.append("productImage",file); //key,value
+
+    return fetch(product_link+"/image",{
+        method:"POST",
+        body:formData
+    }).then(data=>data.text())
+
+    // we can get data in json or text also
+    // since the output will be accepted/success we will use text
+}
