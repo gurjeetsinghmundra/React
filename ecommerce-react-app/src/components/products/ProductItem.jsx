@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { deleteProduct, getProductById, uploadProductImage } from '../../services/ProductService';
-import { getCategories } from '../../services/CategoryService';
+import { getCategories, setCategory } from '../../services/CategoryService';
 
 // function ProductItem({productName,productDescription,productPrice}) 
 // the above is object destructuring , since the function takes 1 object , 
@@ -45,6 +45,12 @@ function ProductItem({ productName, productDescription, productPrice, product_li
 
     // =========================================================================
 
+
+    const handleCategory=(category_link,product_link)=>{
+        // setCategory from categoryService
+        setCategory(product_link+"/category",category_link)
+    }
+
     return (
 
 
@@ -77,7 +83,10 @@ function ProductItem({ productName, productDescription, productPrice, product_li
                                     //category is an object below
                                     categories.map((category)=>{
 
-                                    return(<li><button class="dropdown-item" type="button">{category.categoryName}</button></li>)
+                                    return(<li><button class="dropdown-item" type="button"
+                                    onClick={()=>{
+                                        handleCategory(category._links.self.href,product_link)
+                                    }}>{category.categoryName}</button></li>)
 
                                     })
                                 }
@@ -87,7 +96,7 @@ function ProductItem({ productName, productDescription, productPrice, product_li
                         {/*  */}
 
                         {/* Update Button */}
-                        <button className='btn btn-success'
+                        <button className='btn btn-success '
                             //  onClick={onSelectUpdate(product_link)}>  //this will print all links
                             onClick={() => onSelectUpdate(product_link)}>
                             {/* upar prop pass kiya hai product_link */}
@@ -95,7 +104,7 @@ function ProductItem({ productName, productDescription, productPrice, product_li
 
                         {/* with arrow function , the function will only work if the button is clicked  */}
                         {/* Delete Button */}
-                        <button className='btn btn-danger'
+                        <button className='btn btn-danger ms-5'
                             // product_link is a prop which we have passed above
                             onClick={() => onSelectDelete(product_link)}>
                             Delete</button>

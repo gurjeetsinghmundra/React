@@ -140,6 +140,11 @@ function Product({queryFromNavbar}) {
             </div>
             {/* =====================(search End)====================================== */}
 
+              {/* ============Categories  */}
+              <button type="button" class="btn btn-primary">Electronics</button>
+              <button type="button" class="btn btn-primary ms-4">Furniture</button>
+
+
 
             {/* Displaying Products : Start */}
             {/* Grid Cards */}
